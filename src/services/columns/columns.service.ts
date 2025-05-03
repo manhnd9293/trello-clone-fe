@@ -8,7 +8,13 @@ export class ColumnsService{
     })
   }
 
-  public static getAllColumns(): Promise<Column[]> {
-    return httpClient.get('/columns');
+  public static async getAllColumns(): Promise<{ [key: string] : Column }> {
+    const columns: Column[] = await httpClient.get('/columns');
+    const idToColumn : {[key: string]: Column} = {};
+    for(const column of columns) {
+      idToColumn[column.id] = column
+    }
+
+    return idToColumn;
   }
 }

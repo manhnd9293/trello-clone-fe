@@ -21,6 +21,7 @@ function AddTaskButton({columnId, onCreateTask}: AddTaskButtonProps) {
 
   function handleCreateTask() {
     setTaskName('');
+    setShowInput(false);
     onCreateTask({
       name: taskName,
       columnId
