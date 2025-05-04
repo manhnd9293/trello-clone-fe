@@ -23,7 +23,7 @@ export function TaskColumn({ id, onCreateTask, column}: TaskColumnProps) {
   return (
     <SortableContext items={column.tasks ||[]} strategy={verticalListSortingStrategy} id={id}>
       <div ref={setNodeRef} className={
-        cn('mt-2 p-2 bg-slate-100 rounded-md shadow-md flex flex-col gap-2 max-h-[600px] overflow-y-auto')
+        cn('w-[220px] mt-2 p-2 bg-slate-100 rounded-md shadow-md flex flex-col gap-2 max-h-[600px] overflow-y-auto')
       }>
         <h1 className={'font-semibold text-center'}>{column.name}</h1>
         {(column.tasks || []).map(task => {

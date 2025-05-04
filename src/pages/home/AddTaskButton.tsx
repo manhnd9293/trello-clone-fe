@@ -33,7 +33,7 @@ function AddTaskButton({columnId, onCreateTask}: AddTaskButtonProps) {
     <div>
       {
         showInput && (
-          <div className={'flex flex-col gap-2 items-center w-full'}>
+          <div className={'w-full flex flex-col gap-2 items-center'}>
             <div className={'flex w-[90%] gap-2 items-center'}>
               <Textarea placeholder={'Task'}
                      value={taskName}

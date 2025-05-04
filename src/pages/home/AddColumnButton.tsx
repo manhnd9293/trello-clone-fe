@@ -3,17 +3,15 @@ import { useState } from 'react';
 import { PlusIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input.tsx';
 import { Button } from '@/components/ui/button.tsx';
-import { useMutation } from '@tanstack/react-query';
-import { ColumnsService } from '@/services/columns/columns.service.ts';
 
-// type AddColumnButtonProps = {}
+type AddColumnButtonProps = {
+  onAddColumn: (name: string) => void
+}
 
-function AddColumnButton() {
+function AddColumnButton({onAddColumn}: AddColumnButtonProps) {
   const [showForm, setShowForm] = useState(false);
   const [columnName, setColumnName] = useState('');
-  const {mutateAsync} = useMutation({
-    mutationFn: ColumnsService.addColumn
-  });
+
 
   async function handleAddColumn() {
     if (!columnName) {
@@ -21,16 +19,17 @@ function AddColumnButton() {
     }
     setColumnName('');
     setShowForm(false);
-    await mutateAsync(columnName);
+    onAddColumn(columnName)
   }
 
   return <div
     className={
-      cn('rounded-md w-xs shadow-md flex items-center px-4 cursor-pointer bg-white p-2')}>
+      cn('rounded-md min-w-[220px] shadow-sm flex items-center px-4 cursor-pointer bg-white p-2')}>
     {
       !showForm &&
-      <div className={'flex items-center gap-2 justify-center w-full'} onClick={() => setShowForm(true)}>
-        <PlusIcon size={4}/>
+      <div className={'flex items-center gap-2 justify-center w-full'}
+           onClick={() => setShowForm(true)}>
+        <PlusIcon className={'size-4'}/>
         <span>Add a column</span>
       </div>
     }
